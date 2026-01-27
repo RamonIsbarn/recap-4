@@ -16,10 +16,20 @@ function App() {
     const newColorData = colors.filter((color) => color.id !== colorId);
     setColors(newColorData);
   };
+
+  // const handleEdit = (colorId) => {
+
+  // };
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddColor={handleAddColors} />
+      <ColorForm
+        initialRole={"some color"}
+        initialHex={"#123456"}
+        initialContrast={"#ffffff"}
+        onAddColor={handleAddColors}
+        buttonText={"ADD COLOR"}
+      />
       {colors.map(({ id, role, hex, contrastText }) => (
         <Color
           key={id}
