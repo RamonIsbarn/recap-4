@@ -1,6 +1,13 @@
 import ColorInput from "../ColorInput/ColorInput";
+import { useState } from "react";
 
-export default function ColorForm({ onAddColor }) {
+export default function ColorForm({
+  onAddColor,
+  initialRole,
+  initialHex,
+  initialContrast,
+  buttonText,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
     const newColor = {
@@ -11,25 +18,32 @@ export default function ColorForm({ onAddColor }) {
     };
     onAddColor(newColor);
   }
+
+  const [input, setInput] = useState(initialRole);
+  function handleInput(event) {
+    setInput(event.target.value);
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="role">Role</label>
         <br />
         <input
+          onChange={handleInput}
           id="role"
           name="role"
           type="text"
-          placeholder="eg. some color"
+          value={input}
         ></input>
         <br />
-        <ColorInput label="Hex" id="hex" placeholder="eg. #123456" />
+        <ColorInput label="Hex" id="hex" initialValue={initialHex} />
         <ColorInput
           label="Contrast Text"
           id="contrastText"
-          placeholder="eg. #ffffff"
+          initialValue={initialContrast}
         />
-        <button type="submit">ADD COLOR</button>
+        <button type="submit">{buttonText}</button>
       </form>
     </>
   );
