@@ -2,12 +2,15 @@ import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import "./App.css";
 import ColorForm from "./Components/ColorForm/ColorForm";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("localData", {
+    defaultValue: initialColors,
+  });
 
   const handleAddColors = (newColor) => {
+    newColor.id = Math.random();
     const newColorData = [newColor, ...colors];
     setColors(newColorData);
   };
@@ -17,9 +20,15 @@ function App() {
     setColors(newColorData);
   };
 
-  // const handleEdit = (colorId) => {
+  const handleEdit = (newColor) => {
+    // const test = colors.filter((color) => color.id !== newColor.id);
+    // const newColorData = [newColor, ...test];
+    const newColorData = colors.map((color) =>
+      color.id === newColor.id ? newColor : color,
+    );
+    setColors(newColorData);
+  };
 
-  // };
   return (
     <>
       <h1>Theme Creator</h1>
@@ -30,16 +39,21 @@ function App() {
         onAddColor={handleAddColors}
         buttonText={"ADD COLOR"}
       />
-      {colors.map(({ id, role, hex, contrastText }) => (
-        <Color
-          key={id}
-          hex={hex}
-          role={role}
-          contrastText={contrastText}
-          id={id}
-          onDelete={handleDelete}
-        />
-      ))}
+      {colors.length === 0 ? (
+        <p>No colors.. start by adding one!</p>
+      ) : (
+        colors.map(({ id, role, hex, contrastText }) => (
+          <Color
+            key={id}
+            hex={hex}
+            role={role}
+            contrastText={contrastText}
+            id={id}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
+        ))
+      )}
     </>
   );
 }

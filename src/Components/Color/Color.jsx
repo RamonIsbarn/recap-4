@@ -2,35 +2,32 @@ import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 import { useState } from "react";
 
-export default function Color({ role, hex, contrastText, onDelete, id }) {
+export default function Color({
+  role,
+  hex,
+  contrastText,
+  onDelete,
+  id,
+  onEdit,
+}) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [colorCardValues, setColorCardValues] = useState({
-    role: role,
-    hex: hex,
-    contrastText: contrastText,
-  });
-
-  const handleEditColor = (updatedColor) => {
-    setColorCardValues({
-      role: updatedColor.role,
-      hex: updatedColor.hex,
-      contrastText: updatedColor.contrastText,
-    });
+  function handleEditColor(newColor) {
+    onEdit(newColor);
     setIsEditing(false);
-  };
+  }
 
   return (
     <div
       style={{
-        backgroundColor: colorCardValues.hex,
-        color: colorCardValues.contrastText,
+        backgroundColor: hex,
+        color: contrastText,
       }}
     >
-      <p>{colorCardValues.hex}</p>
-      <p>{colorCardValues.role}</p>
-      <p>{colorCardValues.contrastText}</p>
+      <p>{hex}</p>
+      <p>{role}</p>
+      <p>{contrastText}</p>
       {isDeleting ? (
         <>
           <button onClick={() => setIsDeleting(false)}>CANCEL</button>
@@ -42,9 +39,10 @@ export default function Color({ role, hex, contrastText, onDelete, id }) {
       {isEditing ? (
         <>
           <ColorForm
-            initialRole={colorCardValues.role}
-            initialHex={colorCardValues.hex}
-            initialContrast={colorCardValues.contrastText}
+            initialRole={role}
+            initialHex={hex}
+            initialContrast={contrastText}
+            id={id}
             buttonText={"UPDATE COLOR"}
             onAddColor={handleEditColor}
           />
