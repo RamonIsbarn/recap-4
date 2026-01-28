@@ -7,11 +7,12 @@ export default function ColorForm({
   initialHex,
   initialContrast,
   buttonText,
+  id,
 }) {
   function handleSubmit(event) {
     event.preventDefault();
     const newColor = {
-      id: Math.random(),
+      id: id,
       role: event.target.elements.role.value,
       hex: event.target.elements.hex.value,
       contrastText: event.target.elements.contrastText.value,
