@@ -1,6 +1,7 @@
 import ColorForm from "../ColorForm/ColorForm";
 import "./Color.css";
 import { useState } from "react";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({
   role,
@@ -26,6 +27,7 @@ export default function Color({
       }}
     >
       <p>{hex}</p>
+      <CopyToClipboard hex={hex} />
       <p>{role}</p>
       <p>{contrastText}</p>
       {isDeleting ? (
