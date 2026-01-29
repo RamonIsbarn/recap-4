@@ -37,21 +37,23 @@ function App() {
         onAddColor={handleAddColors}
         buttonText={"ADD COLOR"}
       />
-      {colors.length === 0 ? (
-        <p>No colors.. start by adding one!</p>
-      ) : (
-        colors.map(({ id, role, hex, contrastText }) => (
-          <Color
-            key={id}
-            hex={hex}
-            role={role}
-            contrastText={contrastText}
-            id={id}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-          />
-        ))
-      )}
+      <div className="color-container">
+        {colors.length === 0 ? (
+          <p>No colors.. start by adding one!</p>
+        ) : (
+          colors.map(({ id, role, hex, contrastText }) => (
+            <Color
+              key={id}
+              hex={hex}
+              role={role}
+              contrastText={contrastText}
+              id={id}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          ))
+        )}
+      </div>
     </>
   );
 }

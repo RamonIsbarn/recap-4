@@ -1,5 +1,6 @@
 import ColorInput from "../ColorInput/ColorInput";
 import { useState } from "react";
+import "./ColorForm.css";
 
 export default function ColorForm({
   onAddColor,
@@ -27,10 +28,11 @@ export default function ColorForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form className="color-form" onSubmit={handleSubmit}>
         <label htmlFor="role">Role</label>
         <br />
         <input
+          className="color-card__input"
           onChange={handleInput}
           id="role"
           name="role"
@@ -44,7 +46,9 @@ export default function ColorForm({
           id="contrastText"
           initialValue={initialContrast}
         />
-        <button type="submit">{buttonText}</button>
+        <button className="color-card__button" type="submit">
+          {buttonText}
+        </button>
       </form>
     </>
   );

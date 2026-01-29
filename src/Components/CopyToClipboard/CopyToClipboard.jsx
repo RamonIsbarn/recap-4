@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./CopyToClipboard.css";
 
 export default function CopyToClipboard({ hex }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -22,9 +23,14 @@ export default function CopyToClipboard({ hex }) {
   return (
     <>
       {isCopied ? (
-        <button>SUCCESFULLY COPIED!</button>
+        <button className="color-card__button">SUCCESFULLY COPIED!</button>
       ) : (
-        <button onClick={() => writeClipboardText(hex)}>COPY</button>
+        <button
+          className="color-card__button"
+          onClick={() => writeClipboardText(hex)}
+        >
+          COPY
+        </button>
       )}
     </>
   );

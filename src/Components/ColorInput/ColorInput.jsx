@@ -10,13 +10,19 @@ export default function ColorInput({ label, id, initialValue }) {
       <label htmlFor={id}>{label}</label>
       <br />
       <input
+        className="color-card__input"
         onChange={handleInput}
         id={id}
         name={id}
         value={input}
         type="text"
       ></input>
-      <input onChange={handleInput} value={input} type="color"></input>
+      <input
+        className="color-card__input color-card__input--color"
+        onChange={handleInput}
+        value={input}
+        type="color"
+      ></input>
       <br />
     </>
   );
