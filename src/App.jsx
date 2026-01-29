@@ -21,8 +21,6 @@ function App() {
   };
 
   const handleEdit = (newColor) => {
-    // const test = colors.filter((color) => color.id !== newColor.id);
-    // const newColorData = [newColor, ...test];
     const newColorData = colors.map((color) =>
       color.id === newColor.id ? newColor : color,
     );
